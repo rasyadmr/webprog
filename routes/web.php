@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FoodController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
 
@@ -21,6 +22,8 @@ use App\Http\Controllers\StudentController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('main', [FoodController::class,'index']);
 
 // Customize routing
 Route::get('student_list', function() {
@@ -44,4 +47,3 @@ Route::get('student_list', [StudentController::class,'index']);
 Route::get('test', function() {
     return view('layout');
 });
-
