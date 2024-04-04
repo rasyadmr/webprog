@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('name', 100);
             $table->string('photo', 100);
             $table->text('description'); // Text area (lebih besar daripada string biasa)
-            $table->date('publish_date');
+            $table->date('publish_date')->nullable();
 
             // Cara 1 - Automatis (penamaan harus inggris dan tepat, kalau tidak akan error)
             $table->foreignId('genre_id')->constrained();

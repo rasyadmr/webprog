@@ -3,6 +3,7 @@
 use App\Http\Controllers\FoodController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\BookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,3 +48,6 @@ Route::get('student_list', [StudentController::class,'index']);
 Route::get('test', function() {
     return view('layout');
 });
+
+Route::get('book_list', [BookController::class,'showList']);
+Route::get('book_detail/{id}', [BookController::class, 'showDetail'])->name('book.detail');
