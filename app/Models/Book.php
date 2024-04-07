@@ -9,6 +9,8 @@ class Book extends Model
 {
     use HasFactory;
 
+    protected $dates = ['publish_date']; // Casting the publish date to a Carbon instance
+
     public function genre() {
         return $this->belongsTo(Genre::class);
     }
