@@ -9,6 +9,14 @@ class Book extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'description',
+        'photo',
+        'publish_date',
+        'genre_id'
+    ];
+
     protected $dates = ['publish_date']; // Casting the publish date to a Carbon instance
 
     public function genre() {

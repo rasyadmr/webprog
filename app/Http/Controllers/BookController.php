@@ -55,5 +55,6 @@ class BookController extends Controller
 
 
         // 3. Redirect to detail with success message
+        return redirect()->route('book.detail', ['id' => $book->id])->with('success', 'Book has been created');
     }
 }
