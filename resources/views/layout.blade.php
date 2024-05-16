@@ -15,7 +15,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-8 border">@yield('content')</div>
+            <div class="col-12 border">@yield('content')</div>
         </div>
         <div class="row">
             <div class="col-12 border">

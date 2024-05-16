@@ -42,7 +42,6 @@ Route::get('student_detail/{name}/', function($name) {
 
 // Customize routing with optional variable (class)
 Route::get('student_detail/{name}/{class?}', [StudentController::class,'detail']);
-
 Route::get('student_list', [StudentController::class,'index']);
 
 Route::get('test', function() {
@@ -51,3 +50,6 @@ Route::get('test', function() {
 
 Route::get('book_list', [BookController::class,'showList']);
 Route::get('book_detail/{id}', [BookController::class, 'showDetail'])->name('book.detail');
+
+Route::get('book_form', [BookController::class, 'viewForm'])->name('book.create');
+Route::post('book_store', [BookController::class, 'store'])->name('book.store');
