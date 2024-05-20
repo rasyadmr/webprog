@@ -35,12 +35,25 @@ class BookController extends Controller
         ]);
     }
 
+    public function updateForm(Book $book) {
+        return view('book.update', [
+            'book' => $book,
+            'genres' => Genre::all()
+        ]);
+    }
+
+    public function deleteForm(Book $book) {
+        return view('book.delete', [
+            'book' => $book
+        ]);
+    }
+
     public function store(Request $request) {
         // 1. Validation
         $validated = $request->validate([
             'genre_id' => 'required',
-            'name' => 'required|max:10',
-            'description' => 'required|max:50',
+            'name' => 'required|max:50',
+            'description' => 'required',
             'publish_date' => 'required|date|before_or_equal:today'
         ]);
 
@@ -56,5 +69,29 @@ class BookController extends Controller
 
         // 3. Redirect to detail with success message
         return redirect()->route('book.detail', ['id' => $book->id])->with('success', 'Book has been created');
+    }
+
+    public function edit(Request $request, Book $book) {
+        $validated = $request->validate([
+            'genre_id' => 'required',
+            'name' => 'required|max:50',
+            'description' => 'required',
+            'publish_date' => 'required|date|before_or_equal:today'
+        ]);
+
+        $book->name = $request->name;
+        $book->genre_id = $request->genre_id;
+        $book->description = $request->description;
+        $book->publish_date = $request->publish_date;
+
+        $book->save();
+
+        return redirect()->route('book.detail', ['id' => $book->id])->with('success', 'Book has been updated');
+    }
+
+    public function drop(Book $book) {
+        $book->delete();
+
+        return redirect()->route('book.list')->with('success', 'Book has been deleted');
     }
 }

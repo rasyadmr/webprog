@@ -48,8 +48,14 @@ Route::get('test', function() {
     return view('layout');
 });
 
-Route::get('book_list', [BookController::class,'showList']);
+Route::get('book_list', [BookController::class,'showList'])->name('book.list');
 Route::get('book_detail/{id}', [BookController::class, 'showDetail'])->name('book.detail');
 
 Route::get('book_form', [BookController::class, 'viewForm'])->name('book.create');
 Route::post('book_store', [BookController::class, 'store'])->name('book.store');
+
+Route::get('book_update/{book:id}', [BookController::class, 'updateForm'])->name('book.update');
+Route::post('book_edit/{book:id}', [BookController::class, 'edit'])->name('book.edit');
+
+Route::get('book_delete/{book:id}', [BookController::class, 'deleteForm'])->name('book.delete');
+Route::post('book_drop/{book:id}', [BookController::class, 'drop'])->name('book.drop');

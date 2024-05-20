@@ -19,6 +19,13 @@
             <h5>{{ $book->genre->name }}</h5>
             <h6><i>{{ $book->publish_date->format('d F Y') }}</i></h6>
             <p>{{ $book->description }}</p>
+
+            <form action="{{ route('book.drop', ['book' => $book]) }}" method = "post">
+                @csrf
+                <button type="submit" class="btn btn-danger my-2">Delete</button>
+            </form>
         </div>
+
+        
     </div>
 @endsection
