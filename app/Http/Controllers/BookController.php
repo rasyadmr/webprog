@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Book;
 use App\Models\Genre;
 
@@ -19,7 +20,7 @@ class BookController extends Controller
 
         // 2. Passing data ke view
         return view('book.list', [
-            'books' => Book::paginate(2)
+            'books' => Book::paginate(5)
         ]);
     }
 
@@ -53,17 +54,28 @@ class BookController extends Controller
         $validated = $request->validate([
             'genre_id' => 'required',
             'name' => 'required|max:50',
+            'photo' => 'required|mimes:png,jpg,jpeg|max:2048', 
             'description' => 'required',
             'publish_date' => 'required|date|before_or_equal:today'
         ]);
 
-        // 2. Store into database
+        // 2aa. Take the photo
+        $photo = $request->file('photo');
+        $filename = date('Y-m-d').$photo->getClientOriginalName();
+        $path = 'images/cover/'.$filename;
+        Storage::disk('public')->put($path, file_get_contents($photo));
+
+        // 2ab. Take the photo
+        // $request->photo->store('[Nama folder]', '[Nama drive]') ## Template
+        // $request->photo->store('/images/cover', 'public');
+
+        // 2b. Store into database
         $book = new Book();
         $book->name = $request->name;
         $book->genre_id = $request->genre_id;
         $book->description = $request->description;
         $book->publish_date = $request->publish_date;
-        $book->photo = '1.jpg';
+        $book->photo = $filename;
         $book->save();
 
 
@@ -75,6 +87,7 @@ class BookController extends Controller
         $validated = $request->validate([
             'genre_id' => 'required',
             'name' => 'required|max:50',
+            'photo' => 'mimes:png,jpg,jpeg|max:8192', 
             'description' => 'required',
             'publish_date' => 'required|date|before_or_equal:today'
         ]);

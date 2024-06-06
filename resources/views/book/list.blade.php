@@ -9,6 +9,7 @@
         </button>
     </div>
 @endif
+    <a href="/book_form" type="button" class="btn btn-success my-3"><i class="bi bi-plus-circle"></i> Create a new book</a>
 
     <table class="table table-striped">
         <thead>
@@ -23,10 +24,10 @@
                 <tr>
                     <td scope="row">{{ $book->id }}</td>
                     <td>{{ $book->name }}</td>
-                    <td style="width: 20vw">
-                        <a href="{{ route('book.detail', ['id' => $book->id]) }}" type="button" class="btn btn-primary m-1">Detail</a>
-                        <a href="{{ route('book.update', ['book' => $book]) }}" type="button" class="btn btn-success m-1">Update</a>
-                        <a href="{{ route('book.delete', ['book' => $book]) }}" type="button" class="btn btn-danger m-1">Delete</a>
+                    <td style="width: 22vw">
+                        <a href="{{ route('book.detail', ['id' => $book->id]) }}" type="button" class="btn btn-primary m-1"><i class="bi bi-info-circle"></i> Detail</a>
+                        <a href="{{ route('book.update', ['book' => $book]) }}" type="button" class="btn btn-secondary m-1"><i class="bi bi-pencil"></i> Update</a>
+                        <a href="{{ route('book.delete', ['book' => $book]) }}" type="button" class="btn btn-danger m-1"><i class="bi bi-trash"></i> Delete</a>
                     </td>
                 </tr>
             @empty

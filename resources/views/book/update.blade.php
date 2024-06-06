@@ -23,7 +23,7 @@
 
         <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" class="form-control" name="name" id="" value="{{ $book->name }}"> {{-- Old('name') Untuk menampilkan nama yang pernah diisi --}} 
+            <input type="text" class="form-control" name="name" id="" value="{{ old('name', $book->name) }}"> {{-- Old(variable_1, variable_2) variable_1 -> mengingat terakhir diisi (cocok untuk error), variable_2 -> default value ketika belum diisi --}} 
             @error('name')
                 <div class="alert alert-warning" role="alert">
                     <strong>ALERT!</strong> {{ $message }}
@@ -32,8 +32,18 @@
         </div>
 
         <div class="form-group">
+            <label for="name">Photo</label>
+            <input type="file" class="form-control" name="photo" id="">
+            @error('photo')
+                <div class="alert alert-warning" role="alert">
+                    <strong>ALERT!</strong> {{ $message }}
+                </div>
+            @enderror
+        </div>
+
+        <div class="form-group">
             <label for="description">Description</label>
-            <textarea class="form-control" name="description" id="" rows="3">{{ $book->description }}</textarea>
+            <textarea class="form-control" name="description" id="" rows="3">{{ old('description', $book->description) }}</textarea>
             @error('description')
                 <div class="alert alert-warning" role="alert">
                     <strong>ALERT!</strong> {{ $message }}
@@ -43,7 +53,7 @@
 
         <div class="form-group">
             <label for="publish_date">Publish Date</label>
-            <input type="date" class="form-control" name="publish_date" id="" aria-describedby="helpId" placeholder="" value="{{ $book->publish_date->format('Y-m-d') }}">
+            <input type="date" class="form-control" name="publish_date" id="" aria-describedby="helpId" placeholder="" value="{{ old('publish_date', $book->publish_date->format('Y-m-d')) }}">
             
             @error('publish_date')
                 <div class="alert alert-warning" role="alert">
@@ -52,6 +62,6 @@
             @enderror
         </div>
 
-        <button type="submit" class="btn btn-primary my-2">Edit</button>
+        <button type="submit" class="btn btn-success my-2">Update</button>
     </form>
 @endsection
