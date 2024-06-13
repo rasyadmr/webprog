@@ -27,6 +27,7 @@ return new class extends Migration
             // Cara 2 - Manual (tetapi lebih rentan terhadap error)
             // $table->foreign('genre_id')->references('id')->on('genres'); 
             $table->timestamps();
+            $table->softDeletes(); // Soft Delete (At a record that the book is deleted)
         });
     }
 

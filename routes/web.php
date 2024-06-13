@@ -57,5 +57,10 @@ Route::post('book_store', [BookController::class, 'store'])->name('book.store');
 Route::get('book_update/{book:id}', [BookController::class, 'updateForm'])->name('book.update');
 Route::post('book_edit/{book:id}', [BookController::class, 'edit'])->name('book.edit');
 
-Route::get('book_delete/{book:id}', [BookController::class, 'deleteForm'])->name('book.delete');
-Route::post('book_drop/{book:id}', [BookController::class, 'drop'])->name('book.drop');
+// METHOD 1
+// Route::get('book_delete/{book:id}', [BookController::class, 'deleteForm'])->name('book.delete');
+// Route::post('book_drop/{book:id}', [BookController::class, 'drop'])->name('book.drop');
+
+// METHOD 2
+Route::delete('book_delete/{book:id}', [BookController::class, 'delete'])->name('book.delete');
+

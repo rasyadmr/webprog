@@ -102,7 +102,15 @@ class BookController extends Controller
         return redirect()->route('book.detail', ['id' => $book->id])->with('success', 'Book has been updated');
     }
 
+    // METHOD 1
     public function drop(Book $book) {
+        $book->delete();
+
+        return redirect()->route('book.list')->with('success', 'Book has been deleted');
+    }
+
+    // METHOD 2 (Recommended)
+    public function delete(Book $book) {
         $book->delete();
 
         return redirect()->route('book.list')->with('success', 'Book has been deleted');

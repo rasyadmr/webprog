@@ -27,7 +27,16 @@
                     <td style="width: 22vw">
                         <a href="{{ route('book.detail', ['id' => $book->id]) }}" type="button" class="btn btn-primary m-1"><i class="bi bi-info-circle"></i> Detail</a>
                         <a href="{{ route('book.update', ['book' => $book]) }}" type="button" class="btn btn-secondary m-1"><i class="bi bi-pencil"></i> Update</a>
-                        <a href="{{ route('book.delete', ['book' => $book]) }}" type="button" class="btn btn-danger m-1"><i class="bi bi-trash"></i> Delete</a>
+
+                        {{-- Method 1 --}}
+                        {{-- <a href="{{ route('book.delete', ['book' => $book]) }}" type="button" class="btn btn-danger m-1"><i class="bi bi-trash"></i> Delete</a> --}}
+
+                        {{-- Method 2 (Recommended)--}}
+                        <form action="{{ route('book.delete', ['book' => $book]) }}" method="post">
+                            @csrf
+                            <input type="submit" value="Delete" class="btn btn-danger m-1">
+                            @method("DELETE")
+                        </form>
                     </td>
                 </tr>
             @empty
